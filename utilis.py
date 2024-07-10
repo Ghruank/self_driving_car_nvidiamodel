@@ -12,6 +12,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Convolution2D, Flatten, Dense
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.losses import MeanSquaredError
 
 def getName(filePath):
     return filePath.split('\\')[-1]
@@ -142,7 +143,7 @@ def createModel():
     model.add(Dense(10,activation='elu'))
     model.add(Dense(1))
 
-    model.compile(Adam(learning_rate=0.0001),loss='mse')
+    model.compile(optimizer=Adam(learning_rate=0.0001), loss='MeanSquaredError')
     return model
 
 

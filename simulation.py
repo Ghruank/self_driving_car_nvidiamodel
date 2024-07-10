@@ -1,5 +1,5 @@
 from utilis import *
-
+from tensorflow.keras.losses import MeanSquaredError
 path="myData"
 data=importDataInfo(path)
 
@@ -14,9 +14,9 @@ xTrain, xVal, yTrain, yVal = train_test_split(imagesPath, steering, test_size=0.
 model = createModel()
 model.summary()
 
-history = model.fit(batchGen(xTrain, yTrain, 10, 1), steps_per_epoch=20, epochs=2, validation_data=batchGen(xVal,yVal, 10, 0), validation_steps = 20)
+history = model.fit(batchGen(xTrain, yTrain, 20, 1), steps_per_epoch=20, epochs=10, validation_data=batchGen(xVal,yVal, 20, 0), validation_steps = 40)
 
-model.save('model.h5')
+model.save('model.h5', save_format='h5', include_optimizer=False)
 print("model saved")
 
 plt.plot(history.history['loss'])
